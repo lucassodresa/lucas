@@ -310,6 +310,25 @@ export const lightTokens: Record<string, string> = {
   'letter-spacing-wide': letterSpacing.wide,
   'letter-spacing-wider': letterSpacing.wider,
 
+  // ── Text component ────────────────────────────────────────
+  'text-size-heading-xl': ref('font-size-4xl'),
+  'text-size-heading-l': ref('font-size-3xl'),
+  'text-size-heading-m': ref('font-size-xl'),
+  'text-size-heading-s': ref('font-size-lg'),
+  'text-size-body-l': ref('font-size-xl'),
+  'text-size-body': ref('font-size-lg'),
+  'text-size-body-s': ref('font-size-md'),
+
+  'text-weight-heading': ref('font-weight-bold'),
+  'text-weight-body': ref('font-weight-regular'),
+
+  'text-color-default': ref('color-text-primary'),
+  'text-color-muted': ref('color-text-muted'),
+  'text-color-secondary': ref('color-text-secondary'),
+
+  'text-leading-heading': ref('line-height-tight'),
+  'text-leading-body': ref('line-height-normal'),
+
   // ── Spacing ───────────────────────────────────────────────
   'spacing-0': spacing[0],
   'spacing-1': spacing[1],
