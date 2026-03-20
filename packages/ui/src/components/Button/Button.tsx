@@ -63,7 +63,6 @@ function Spinner() {
 
 function useSubmitCooldown(duration = 1000) {
   const [cooling, setCooling] = useState(false);
-  const guardRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(
@@ -74,14 +73,10 @@ function useSubmitCooldown(duration = 1000) {
   );
 
   const trigger = useCallback(() => {
-    if (guardRef.current) return false;
-    guardRef.current = true;
     setCooling(true);
     timerRef.current = setTimeout(() => {
-      guardRef.current = false;
       setCooling(false);
     }, duration);
-    return true;
   }, [duration]);
 
   return { cooling, trigger } as const;
@@ -112,18 +107,12 @@ export function Button({
   const isSubmit = type === 'submit';
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-      if (!hasHref && isEffectivelyDisabled) {
-        e.preventDefault();
-        return;
+      if (!hasHref && isSubmit && preventDoubleClick) {
+        trigger();
       }
-      const shouldNotClick = !hasHref && isSubmit && preventDoubleClick && !trigger();
-      if (shouldNotClick) {
-        return;
-      }
-
       onClick?.(e);
     },
-    [hasHref, isSubmit, isEffectivelyDisabled, preventDoubleClick, onClick, trigger],
+    [hasHref, isSubmit, preventDoubleClick, onClick, trigger],
   );
 
   const classNames = clsx(

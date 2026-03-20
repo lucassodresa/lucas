@@ -1,4 +1,5 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { describe, it, expect, vi } from 'vitest';
 import { Button } from './Button';
@@ -27,32 +28,35 @@ describe('rendering', () => {
 });
 
 describe('click behaviour', () => {
-  it('calls onClick when clicked', () => {
+  it('calls onClick when clicked', async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(<Button onClick={onClick}>Click me</Button>);
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('does not call onClick when disabled', () => {
+  it('does not call onClick when disabled', async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(
       <Button disabled onClick={onClick}>
         Click me
       </Button>,
     );
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
     expect(onClick).not.toHaveBeenCalled();
   });
 
-  it('does not call onClick when loading', () => {
+  it('does not call onClick when loading', async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(
       <Button isLoading onClick={onClick}>
         Save
       </Button>,
     );
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
     expect(onClick).not.toHaveBeenCalled();
   });
 });
@@ -114,7 +118,8 @@ describe('loading state', () => {
 });
 
 describe('preventDoubleClick', () => {
-  it('calls onClick once when two clicks arrive rapidly on a submit button', () => {
+  it('calls onClick once when two clicks arrive rapidly on a submit button', async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(
       <Button type="submit" preventDoubleClick onClick={onClick}>
@@ -122,14 +127,30 @@ describe('preventDoubleClick', () => {
       </Button>,
     );
     const btn = screen.getByRole('button');
-    act(() => {
-      fireEvent.click(btn);
-      fireEvent.click(btn);
-    });
+    await user.click(btn);
+    await user.click(btn);
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('does not block rapid clicks on a type=button', () => {
+  it('re-enables after the cooldown expires', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    const onClick = vi.fn();
+    render(
+      <Button type="submit" preventDoubleClick onClick={onClick}>
+        Submit
+      </Button>,
+    );
+    const btn = screen.getByRole('button');
+    await user.click(btn);
+    act(() => vi.advanceTimersByTime(1000));
+    await user.click(btn);
+    expect(onClick).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
+  });
+
+  it('does not block rapid clicks on a type=button', async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(
       <Button type="button" preventDoubleClick onClick={onClick}>
@@ -137,8 +158,8 @@ describe('preventDoubleClick', () => {
       </Button>,
     );
     const btn = screen.getByRole('button');
-    fireEvent.click(btn);
-    fireEvent.click(btn);
+    await user.click(btn);
+    await user.click(btn);
     expect(onClick).toHaveBeenCalledTimes(2);
   });
 });

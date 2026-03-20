@@ -7,12 +7,12 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build -w @lucas/ui && npm run build -w @lucas/playground",
+    "test": "npm run test -w @lucas/ui",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "typecheck": "npm run typecheck -w @lucas/ui && npm run typecheck -w @lucas/playground",
     "prepare": "husky"
   },
   "engines": {

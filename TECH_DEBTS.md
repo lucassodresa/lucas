@@ -34,27 +34,25 @@ is not guaranteed across workspaces.
 
 ---
 
-## Token watch mode → proper file watcher
+## ~~Token watch mode~~ ✅ Resolved
 
-**Current:** The `generateTokens` Vite plugin hooks into `closeBundle` to write `tokens.css` and
-`tokens-dark.css` after each build. The `addWatchFile` call in `buildStart` tells Vite to watch
-`tokens.ts`, so `vite build --watch` does re-run when the file changes — but the full bundle
-rebuild is triggered, which is heavier than necessary. Additionally, `closeBundle` is not called
-in Vite's dev server (only in build mode), so this approach doesn't compose well with a future
-`vite dev` setup for the library.
+Token generation is now handled by `packages/ui/plugins/tokens.ts`, a shared Vite plugin
+used by both `vite.config.ts` and `.storybook/main.ts` (via `viteFinal`).
 
-**Known rough edge:** During `--watch` mode there can be a brief window where `dist/tokens.css`
-doesn't exist between the `emptyOutDir` clear and the `closeBundle` write, which would break
-any consumer running a concurrent dev server.
+- `configureServer` — generates tokens at dev-server startup (Storybook, future vite dev)
+- `closeBundle` — generates tokens after build (handles `emptyOutDir` timing)
+- `handleHotUpdate` — regenerates + triggers full-reload when `tokens.ts` changes in dev
 
-**Upgrade when:** Token editing frequency makes the full rebuild lag noticeable, OR you add a
-Vite dev server to the library package.
+`vite build --watch` still triggers a full bundle rebuild on token changes (via `addWatchFile`).
+This is acceptable for now; revisit if rebuild lag becomes noticeable.
 
-**What to add:** Replace the Vite plugin with a dedicated `chokidar` watcher script
-(`scripts/watch-tokens.ts`) that only regenerates the two CSS files on change — no full bundle
-rebuild. Run it in parallel with `vite build --watch` via `concurrently` in the `dev` script.
-This also unblocks moving `emptyOutDir: false` in the Vite lib config so the dist folder isn't
-cleared between rebuilds.
+---
+
+## ~~Storybook token dependency~~ ✅ Resolved
+
+`npm run storybook` now works on a completely fresh checkout with no prior build.
+The `tokensPlugin` injected via `viteFinal` runs `configureServer` before the Storybook
+dev server accepts connections, writing `dist/tokens/tokens.css` unconditionally at startup.
 
 ---
 
