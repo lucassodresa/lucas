@@ -20,11 +20,14 @@ function generateTokens(): Plugin {
 
   return {
     name: 'generate-tokens',
-    async buildStart() {
+    buildStart() {
+      // Watch tokens.ts so any change triggers a rebuild in --watch mode
+      this.addWatchFile(resolve(__dirname, 'src/tokens/tokens.ts'));
+    },
+    // closeBundle runs after emptyOutDir has cleared dist/ and after Vite has
+    // written all bundle files — safe to write additional files here.
+    async closeBundle() {
       const tokensFile = resolve(__dirname, 'src/tokens/tokens.ts');
-
-      // Tell Vite to watch tokens.ts — any change triggers a rebuild and re-runs this hook
-      this.addWatchFile(tokensFile);
 
       // file:// URL bypasses Vite's resolver; ?v= busts the ESM module cache
       const { lightTokens, darkTokens } = (await nodeImport(

@@ -1,6 +1,8 @@
 // @lucas/ui — component exports
-// Components will be exported from here as they are built.
-// Example: export { Button } from './components/Button';
 
 // Tokens
 export * from './tokens/tokens';
+
+// Components
+export { Button } from './components/Button';
+export type { ButtonProps, ButtonVariant, ButtonSize } from './components/Button';

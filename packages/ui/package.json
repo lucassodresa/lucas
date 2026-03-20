@@ -12,6 +12,7 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./styles": "./dist/ui.css",
     "./tokens": "./dist/tokens/tokens.css",
     "./tokens-dark": "./dist/tokens/tokens-dark.css"
   },
@@ -19,12 +20,11 @@
     "dist"
   ],
   "scripts": {
-    "postinstall": "npm run tokens:generate",
     "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
     "dev": "vite build --watch",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -33,10 +33,12 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
+    "@types/jest-axe": "^3.5.9",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "jest-axe": "^9.0.0",
+    "jsdom": "^29.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tsx": "^4.21.0",
@@ -45,6 +47,7 @@
     "vitest": "^3.0.5"
   },
   "dependencies": {
-    "@fontsource-variable/inter": "^5.2.8"
+    "@fontsource-variable/inter": "^5.2.8",
+    "clsx": "^2.1.1"
   }
 }

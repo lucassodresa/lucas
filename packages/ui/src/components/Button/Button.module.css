@@ -1,0 +1,193 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default),
+    opacity var(--duration-fast) var(--ease-default);
+}
+
+.button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* Anchor-specific disabled: remove pointer events so browser doesn't treat
+   it as interactive (href is already removed, but belt-and-suspenders) */
+.button[aria-disabled='true']:not(:disabled) {
+  pointer-events: none;
+}
+
+/* ─── Sizes ────────────────────────────────────────────────────────────────── */
+
+/* sm ≈ 37px height */
+.button--sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-1);
+}
+
+/* md ≈ 48px height — meets GOV.UK 44px minimum touch target */
+.button--md {
+  padding: var(--spacing-3) var(--spacing-5);
+  font-size: var(--font-size-md);
+  gap: var(--spacing-2);
+}
+
+/* lg ≈ 54px height */
+.button--lg {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-lg);
+  gap: var(--spacing-2);
+}
+
+/* ─── Variants ─────────────────────────────────────────────────────────────── */
+
+/* Primary */
+.button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-accent);
+  border-color: transparent;
+}
+
+.button--primary:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-primary-hover);
+}
+
+.button--primary:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-primary-active);
+}
+
+/* Secondary */
+.button--secondary {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-default);
+}
+
+.button--secondary:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-bg-overlay);
+  border-color: var(--color-border-strong);
+}
+
+.button--secondary:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-bg-overlay);
+  border-color: var(--color-border-strong);
+}
+
+/* Ghost */
+.button--ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.button--ghost:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-primary-subtle);
+}
+
+.button--ghost:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-primary-muted);
+}
+
+/* Danger */
+.button--danger {
+  background-color: var(--color-danger);
+  color: var(--color-text-on-accent);
+  border-color: transparent;
+}
+
+.button--danger:hover:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-danger-hover);
+}
+
+.button--danger:active:not(:disabled):not([aria-disabled='true']) {
+  background-color: var(--color-danger-active);
+}
+
+/* Link — inline action that looks like a hyperlink, renders as <button> */
+.button--link {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: transparent;
+  text-decoration: underline;
+  /* Strip horizontal padding so it sits flush in text flow */
+  padding-inline: 0;
+}
+
+.button--link:hover:not(:disabled):not([aria-disabled='true']) {
+  color: var(--color-primary-hover);
+}
+
+.button--link:active:not(:disabled):not([aria-disabled='true']) {
+  color: var(--color-primary-active);
+}
+
+/* ─── Loading ──────────────────────────────────────────────────────────────── */
+
+.button--loading {
+  cursor: wait;
+}
+
+/* ─── Icon layout ──────────────────────────────────────────────────────────── */
+
+.button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Icons scale with the button's font-size (set by size modifier) */
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* Slightly tighter gap when icon present (gap already defined per-size;
+   these classes exist as hooks for future per-variant icon tweaks) */
+.button--has-left-icon,
+.button--has-right-icon {
+  /* gap is already inherited from the size class */
+}
+
+/* ─── Spinner ──────────────────────────────────────────────────────────────── */
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  /* calc() keeps the value token-derived: --duration-slow (300ms) × 3 = 900ms */
+  animation: button-spin calc(var(--duration-slow) * 3) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    opacity: 0.6;
+  }
+}
