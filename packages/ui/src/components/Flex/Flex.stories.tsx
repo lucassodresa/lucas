@@ -38,7 +38,6 @@ const ColorBox = ({ label }: { label: string }) => (
   <div
     style={{
       background: 'var(--color-primary-muted)',
-      border: '1px solid var(--color-primary-border)',
       borderRadius: 'var(--radius-sm)',
       padding: 'var(--spacing-3) var(--spacing-4)',
       fontSize: 'var(--font-size-sm)',
@@ -89,7 +88,7 @@ export const Directions: Story = {
 export const Alignment: Story = {
   render: () => (
     <Flex direction="column" gap={6}>
-      {(['start', 'center', 'end', 'stretch'] as const).map((align) => (
+      {(['start', 'center', 'end', 'stretch', 'baseline'] as const).map((align) => (
         <Flex key={align} direction="column" gap={2}>
           <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
             align=&quot;{align}&quot; justify=&quot;between&quot;
@@ -169,7 +168,6 @@ export const WrappingItems: Story = {
       style={{
         background: 'var(--color-bg-muted)',
         borderRadius: 'var(--radius-md)',
-        maxWidth: '400px',
       }}
     >
       {(
@@ -184,6 +182,9 @@ export const WrappingItems: Story = {
           'Theta',
           'Iota',
           'Kappa',
+          'Lambda',
+          'Mu',
+          'Nu',
         ] as const
       ).map((label) => (
         <ColorBox key={label} label={label} />
