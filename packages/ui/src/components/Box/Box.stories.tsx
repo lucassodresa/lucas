@@ -33,7 +33,6 @@ type Story = StoryObj<typeof meta>;
 const spacingScale = [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24] as const;
 
 export const Overview: Story = {
-  args: { children: 'Box' },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       {spacingScale.map((value) => (
@@ -50,7 +49,6 @@ export const Overview: Story = {
 };
 
 export const SpacingScale: Story = {
-  args: { children: 'Box' },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       {spacingScale.map((value) => (
@@ -74,7 +72,6 @@ export const SpacingScale: Story = {
 };
 
 export const AsSemantic: Story = {
-  args: { children: 'Box' },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       {(['section', 'article', 'nav', 'main', 'aside'] as const).map((tag) => (

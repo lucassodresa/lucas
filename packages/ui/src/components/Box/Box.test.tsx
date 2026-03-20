@@ -48,7 +48,7 @@ describe('element rendering', () => {
         content
       </Box>,
     );
-    expect(screen.getByTestId('box').classList.contains('custom-class')).toBe(true);
+    expect(screen.getByTestId('box')).toHaveClass('custom-class');
   });
 
   it('forwards arbitrary native props — id', () => {

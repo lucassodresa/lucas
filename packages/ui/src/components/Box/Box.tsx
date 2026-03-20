@@ -56,9 +56,11 @@ function BoxInner<E extends React.ElementType = 'div'>(
     marginLeft,
   });
 
-  const spacingClassNames = spacingClassKeys.map((key) => styles[key]).filter(Boolean);
-
-  const classNames = clsx(styles.box, ...spacingClassNames, className);
+  const classNames = clsx(
+    styles.box,
+    spacingClassKeys.map((key) => styles[key]),
+    className,
+  );
 
   return <Element ref={ref} className={classNames} {...rest} />;
 }
