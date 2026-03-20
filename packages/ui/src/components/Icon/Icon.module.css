@@ -1,0 +1,50 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Default: scales with the parent element's font-size */
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ─── Sizes ─────────────────────────────────────────────────────────────────── */
+
+/* Explicit token-derived sizes for standalone use */
+.icon--sm {
+  width: var(--font-size-sm);
+  height: var(--font-size-sm);
+}
+
+.icon--md {
+  width: var(--font-size-md);
+  height: var(--font-size-md);
+}
+
+.icon--lg {
+  width: var(--font-size-lg);
+  height: var(--font-size-lg);
+}
+
+/* ─── Colors ────────────────────────────────────────────────────────────────── */
+
+/* Lucide icons use stroke="currentColor" — setting color here cascades into the SVG */
+.icon--primary {
+  color: var(--color-primary);
+}
+
+.icon--muted {
+  color: var(--color-text-muted);
+}
+
+.icon--success {
+  color: var(--color-success);
+}
+
+.icon--warning {
+  color: var(--color-warning);
+}
+
+.icon--danger {
+  color: var(--color-danger);
+}

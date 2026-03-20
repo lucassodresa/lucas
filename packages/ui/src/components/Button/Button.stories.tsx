@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
+import { SearchIcon, ArrowRightIcon, XIcon } from '../Icon/icons';
 
 const meta = {
   title: 'Components/Button',
@@ -72,20 +73,20 @@ export const Loading: Story = {
 export const WithLeftIcon: Story = {
   args: {
     children: 'Search',
-    leftIcon: <span style={{ fontSize: '1em' }}>🔍</span>,
+    leftIcon: <SearchIcon />,
   },
 };
 
 export const WithRightIcon: Story = {
   args: {
     children: 'Continue',
-    rightIcon: <span style={{ fontSize: '1em' }}>→</span>,
+    rightIcon: <ArrowRightIcon />,
   },
 };
 
 export const IconOnly: Story = {
   args: {
-    leftIcon: <span style={{ fontSize: '1em' }}>✕</span>,
+    leftIcon: <XIcon />,
     'aria-label': 'Close',
   },
 };

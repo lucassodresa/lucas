@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import styles from './Button.module.css';
+import { Spinner } from '../Spinner';
+import { Icon } from '../Icon';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'link';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -30,36 +32,6 @@ interface ButtonWithoutChildren extends ButtonBaseProps {
 }
 
 export type ButtonProps = ButtonWithChildren | ButtonWithoutChildren;
-
-function Icon({ children }: { children: React.ReactNode }) {
-  return (
-    <span className={styles.button__icon} aria-hidden="true">
-      {children}
-    </span>
-  );
-}
-
-function Spinner() {
-  return (
-    <svg
-      className={styles.spinner}
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeDasharray="40 60"
-      />
-    </svg>
-  );
-}
 
 function useSubmitCooldown(duration = 1000) {
   const [cooling, setCooling] = useState(false);
@@ -126,7 +98,7 @@ export function Button({
   );
 
   const content = isLoading ? (
-    <Spinner />
+    <Spinner size={size} />
   ) : (
     <>
       {leftIcon && <Icon>{leftIcon}</Icon>}

@@ -1,0 +1,33 @@
+@keyframes spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  flex-shrink: 0;
+  /* calc() keeps the value token-derived: --duration-slow (300ms) × 3 = 900ms */
+  animation: spinner-spin calc(var(--duration-slow) * 3) linear infinite;
+}
+
+.spinner--sm {
+  width: var(--font-size-sm);
+  height: var(--font-size-sm);
+}
+
+.spinner--md {
+  width: var(--font-size-md);
+  height: var(--font-size-md);
+}
+
+.spinner--lg {
+  width: var(--font-size-lg);
+  height: var(--font-size-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    opacity: 0.6;
+  }
+}
