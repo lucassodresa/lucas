@@ -68,15 +68,31 @@ describe('rendering', () => {
     expect(screen.getByText('Text')).toHaveAttribute('id', 'my-text');
   });
 
-  it('truncate prop — element is in the DOM', () => {
-    render(<Text truncate>Long text</Text>);
-    expect(screen.getByText('Long text')).toBeInTheDocument();
+  it('truncate renders an accessible element', async () => {
+    const { container } = render(<Text truncate>Long text that should be truncated</Text>);
+    expect(screen.getByText('Long text that should be truncated')).toBeInTheDocument();
+    expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('weight prop — element is in the DOM', () => {
-    render(<Text weight="bold">Bold text</Text>);
-    expect(screen.getByText('Bold text')).toBeInTheDocument();
-  });
+  it.each(['regular', 'medium', 'semibold', 'bold'] as const)(
+    'weight="%s" renders without error',
+    async (weight) => {
+      const { container } = render(<Text weight={weight}>Weighted text</Text>);
+      expect(screen.getByText('Weighted text')).toBeInTheDocument();
+      expect(await axe(container)).toHaveNoViolations();
+    },
+  );
+});
+
+describe('color prop', () => {
+  it.each(['default', 'muted', 'secondary'] as const)(
+    'color="%s" renders without error',
+    async (color) => {
+      const { container } = render(<Text color={color}>Colored text</Text>);
+      expect(screen.getByText('Colored text')).toBeInTheDocument();
+      expect(await axe(container)).toHaveNoViolations();
+    },
+  );
 });
 
 describe('accessibility', () => {
