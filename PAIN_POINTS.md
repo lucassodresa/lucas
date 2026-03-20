@@ -34,6 +34,21 @@ is not guaranteed across workspaces.
 
 ---
 
+## Token watch mode → chokidar watcher
+
+**Current:** `npm run dev` generates tokens once at startup. Editing `src/tokens/tokens.ts`
+during watch mode requires stopping dev and re-running `npm run tokens:generate` manually
+(or running it in a second terminal).
+
+**Upgrade when:** You find yourself editing tokens frequently during active development
+and the manual re-run becomes annoying.
+
+**What to add:** Replace `vite build --watch` in the `dev` script with a custom watcher
+script using `chokidar` that re-runs `tokens:generate` whenever `src/tokens/tokens.ts` changes,
+then hands off to Vite.
+
+---
+
 ## Visual regression → Chromatic
 
 **Current:** No visual regression testing (Storybook will be added in Phase 4).

@@ -28,8 +28,8 @@ This plan was built from a design conversation with the following decisions alre
 
 ## Progress checklist
 
-- [ ] Phase 1 — Minimal workspace scaffold
-- [ ] Phase 2 — Design token system
+- [x] Phase 1 — Minimal workspace scaffold
+- [x] Phase 2 — Design token system
 - [ ] Phase 3 — Button (first component, full stack)
 - [ ] Phase 4 — Storybook + visual regression baseline
 - [ ] Phase 5 — Core component set

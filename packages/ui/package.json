@@ -11,12 +11,15 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./tokens": "./dist/tokens/tokens.css",
+    "./tokens-dark": "./dist/tokens/tokens-dark.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
+    "postinstall": "npm run tokens:generate",
     "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
     "dev": "vite build --watch",
     "test": "vitest run --passWithNoTests",
@@ -36,8 +39,12 @@
     "jest-axe": "^9.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "tsx": "^4.21.0",
     "vite": "^6.1.0",
     "vite-plugin-dts": "^4.4.0",
     "vitest": "^3.0.5"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8"
   }
 }
