@@ -16,7 +16,6 @@ export default defineConfig({
         'src/**/*.stories.tsx',
         'src/tokens/**',
         'src/types/**',
-        'src/utils/**',
       ],
       thresholds: {
         lines: 100,
