@@ -17,3 +17,9 @@ export * from './components/Icon/icons';
 
 export { Box } from './components/Box';
 export type { BoxProps } from './components/Box';
+
+export { Text } from './components/Text';
+export type { TextProps, TextSize, TextElement, TextColor, TextWeight } from './components/Text';
+
+export { Flex } from './components/Flex';
+export type { FlexProps, FlexDirection, FlexAlign, FlexJustify, FlexWrap } from './components/Flex';
