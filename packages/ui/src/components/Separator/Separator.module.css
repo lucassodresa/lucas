@@ -1,0 +1,15 @@
+.separator {
+  margin: 0;
+  border: none;
+  flex-shrink: 0;
+}
+
+.horizontal {
+  width: 100%;
+  border-top: 1px solid var(--color-border-default);
+}
+
+.vertical {
+  height: 100%;
+  border-left: 1px solid var(--color-border-default);
+}

@@ -23,3 +23,6 @@ export type { TextProps, TextSize, TextElement, TextColor, TextWeight } from './
 
 export { Flex } from './components/Flex';
 export type { FlexProps, FlexDirection, FlexAlign, FlexJustify, FlexWrap } from './components/Flex';
+
+export { Separator } from './components/Separator';
+export type { SeparatorProps, SeparatorOrientation } from './components/Separator';

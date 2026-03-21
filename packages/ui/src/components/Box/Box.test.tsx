@@ -280,4 +280,24 @@ describe('accessibility', () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('renders as="button" with native button semantics intact', () => {
+    render(
+      <Box as="button" data-testid="box-button" type="button">
+        Click me
+      </Box>,
+    );
+    const element = screen.getByTestId('box-button');
+    expect(element.tagName).toBe('BUTTON');
+    expect(element).toHaveAttribute('type', 'button');
+  });
+
+  it('passes axe for as="button"', async () => {
+    const { container } = render(
+      <Box as="button" type="button">
+        Click me
+      </Box>,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });
