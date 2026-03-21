@@ -26,3 +26,6 @@ export type { FlexProps, FlexDirection, FlexAlign, FlexJustify, FlexWrap } from 
 
 export { Separator } from './components/Separator';
 export type { SeparatorProps, SeparatorOrientation } from './components/Separator';
+
+export { Heading } from './components/Heading';
+export type { HeadingProps, HeadingElement, HeadingSize } from './components/Heading';
