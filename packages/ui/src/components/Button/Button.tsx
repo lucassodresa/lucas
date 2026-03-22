@@ -87,6 +87,20 @@ export function Button({
     [hasHref, isSubmit, preventDoubleClick, onClick, trigger],
   );
 
+  // Space activates role=button anchors per ARIA spec (browsers only fire click
+  // on Enter for <a> elements). preventDefault suppresses the default scroll.
+  // Cast is required: KeyboardEvent is not a MouseEvent. onClick consumers
+  // must not rely on mouse-coordinate properties (clientX, clientY, etc.).
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+      if (e.key === ' ') {
+        e.preventDefault();
+        onClick?.(e as unknown as React.MouseEvent<HTMLAnchorElement>);
+      }
+    },
+    [onClick],
+  );
+
   const classNames = clsx(
     styles.button,
     styles[`button--${variant}`],
@@ -122,6 +136,7 @@ export function Button({
         aria-label={effectiveAriaLabel}
         className={classNames}
         onClick={handleClick as React.MouseEventHandler<HTMLAnchorElement>}
+        onKeyDown={handleKeyDown}
       >
         {content}
       </a>

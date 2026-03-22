@@ -27,6 +27,34 @@ describe('rendering', () => {
   });
 });
 
+describe('anchor-button keyboard activation', () => {
+  it('Space key activates onClick on an href button', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(
+      <Button href="/next" onClick={onClick}>
+        Continue
+      </Button>,
+    );
+    await user.tab();
+    await user.keyboard(' ');
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('Enter key activates onClick on an href button', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(
+      <Button href="/next" onClick={onClick}>
+        Continue
+      </Button>,
+    );
+    await user.tab();
+    await user.keyboard('{Enter}');
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe('click behaviour', () => {
   it('calls onClick when clicked', async () => {
     const user = userEvent.setup();
