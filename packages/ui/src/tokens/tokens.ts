@@ -17,19 +17,22 @@ const ref = (name: string) => `var(--${name})`;
 // ── Color scale primitives ────────────────────────────────────
 // Used by semantic tokens below (via ref()) and exported for TS consumers.
 
+// Slate-inspired neutral — slightly blue-cool at every step.
+// Improves light mode text contrast (500 now meets WCAG 4.5:1 on white)
+// and gives dark mode surfaces a premium, modern quality.
 export const colorNeutral = {
   0: '#ffffff',
-  50: '#f8f9fa',
-  100: '#f1f3f5',
-  200: '#e9ecef',
-  300: '#dee2e6',
-  400: '#ced4da',
-  500: '#adb5bd',
-  600: '#868e96',
-  700: '#495057',
-  800: '#343a40',
-  900: '#212529',
-  950: '#0d0f12',
+  50: '#f8fafc',
+  100: '#f1f5f9',
+  200: '#e2e8f0',
+  300: '#cbd5e1',
+  400: '#94a3b8',
+  500: '#64748b',
+  600: '#475569',
+  700: '#334155',
+  800: '#1e293b',
+  900: '#0f172a',
+  950: '#0d1117',
 } as const;
 
 export const colorBlue = {
@@ -43,6 +46,7 @@ export const colorBlue = {
   700: '#1d4ed8',
   800: '#1e40af',
   900: '#1e3a8a',
+  950: '#172554',
 } as const;
 
 export const colorGreen = {
@@ -53,6 +57,7 @@ export const colorGreen = {
   600: '#16a34a',
   700: '#15803d',
   900: '#14532d',
+  950: '#052e16',
 } as const;
 
 export const colorYellow = {
@@ -62,6 +67,7 @@ export const colorYellow = {
   500: '#eab308',
   600: '#ca8a04',
   900: '#713f12',
+  950: '#431407',
 } as const;
 
 export const colorRed = {
@@ -72,6 +78,7 @@ export const colorRed = {
   600: '#dc2626',
   700: '#b91c1c',
   900: '#7f1d1d',
+  950: '#450a0a',
 } as const;
 
 // ── Font sizes (modular scale — base 16px, ratio 1.25) ───────
@@ -205,6 +212,7 @@ export const lightTokens: Record<string, string> = {
   'color-blue-700': colorBlue[700],
   'color-blue-800': colorBlue[800],
   'color-blue-900': colorBlue[900],
+  'color-blue-950': colorBlue[950],
 
   'color-green-50': colorGreen[50],
   'color-green-100': colorGreen[100],
@@ -213,6 +221,7 @@ export const lightTokens: Record<string, string> = {
   'color-green-600': colorGreen[600],
   'color-green-700': colorGreen[700],
   'color-green-900': colorGreen[900],
+  'color-green-950': colorGreen[950],
 
   'color-yellow-50': colorYellow[50],
   'color-yellow-100': colorYellow[100],
@@ -220,6 +229,7 @@ export const lightTokens: Record<string, string> = {
   'color-yellow-500': colorYellow[500],
   'color-yellow-600': colorYellow[600],
   'color-yellow-900': colorYellow[900],
+  'color-yellow-950': colorYellow[950],
 
   'color-red-50': colorRed[50],
   'color-red-100': colorRed[100],
@@ -228,6 +238,7 @@ export const lightTokens: Record<string, string> = {
   'color-red-600': colorRed[600],
   'color-red-700': colorRed[700],
   'color-red-900': colorRed[900],
+  'color-red-950': colorRed[950],
 
   // ── Surface & background ──────────────────────────────────
   'color-bg-base': ref('color-neutral-0'),
@@ -388,15 +399,18 @@ export const lightTokens: Record<string, string> = {
 
 /** Semantic token overrides for dark mode. Primitives stay unchanged. */
 export const darkTokens: Record<string, string> = {
+  // ── Surfaces — slate-950 base with clear 4-step hierarchy ─
   'color-bg-base': ref('color-neutral-950'),
   'color-bg-subtle': ref('color-neutral-900'),
   'color-bg-muted': ref('color-neutral-800'),
   'color-bg-overlay': ref('color-neutral-700'),
 
+  // ── Borders ───────────────────────────────────────────────
   'color-border-default': ref('color-neutral-700'),
   'color-border-strong': ref('color-neutral-600'),
   'color-border-focus': ref('color-blue-400'),
 
+  // ── Text ──────────────────────────────────────────────────
   'color-text-primary': ref('color-neutral-50'),
   'color-text-secondary': ref('color-neutral-300'),
   'color-text-muted': ref('color-neutral-500'),
@@ -404,33 +418,38 @@ export const darkTokens: Record<string, string> = {
   'color-text-inverse': ref('color-neutral-900'),
   'color-text-on-accent': ref('color-neutral-0'),
 
+  // ── Primary ───────────────────────────────────────────────
   'color-primary': ref('color-blue-400'),
   'color-primary-hover': ref('color-blue-300'),
   'color-primary-active': ref('color-blue-200'),
-  'color-primary-subtle': ref('color-blue-900'),
-  'color-primary-muted': ref('color-blue-800'),
+  'color-primary-subtle': ref('color-blue-950'),
+  'color-primary-muted': ref('color-blue-900'),
   'color-primary-border': ref('color-blue-700'),
 
+  // ── Success ───────────────────────────────────────────────
   'color-success': ref('color-green-400'),
   'color-success-hover': ref('color-green-500'),
-  'color-success-subtle': ref('color-green-900'),
+  'color-success-subtle': ref('color-green-950'),
   'color-success-muted': ref('color-green-900'),
   'color-success-text': ref('color-green-400'),
 
+  // ── Warning ───────────────────────────────────────────────
   'color-warning': ref('color-yellow-400'),
   'color-warning-hover': ref('color-yellow-500'),
-  'color-warning-subtle': ref('color-yellow-900'),
+  'color-warning-subtle': ref('color-yellow-950'),
   'color-warning-muted': ref('color-yellow-900'),
   'color-warning-text': ref('color-yellow-400'),
 
+  // ── Danger ────────────────────────────────────────────────
   'color-danger': ref('color-red-400'),
   'color-danger-hover': ref('color-red-500'),
   'color-danger-active': ref('color-red-400'),
-  'color-danger-subtle': ref('color-red-900'),
+  'color-danger-subtle': ref('color-red-950'),
   'color-danger-muted': ref('color-red-900'),
   'color-danger-border': ref('color-red-700'),
   'color-danger-text': ref('color-red-400'),
 
+  // ── Shadows — higher opacity needed on dark surfaces ──────
   'shadow-xs': '0 1px 2px 0 rgb(0 0 0 / 0.25)',
   'shadow-sm': '0 1px 3px 0 rgb(0 0 0 / 0.40), 0 1px 2px -1px rgb(0 0 0 / 0.40)',
   'shadow-md': '0 4px 6px -1px rgb(0 0 0 / 0.40), 0 2px 4px -2px rgb(0 0 0 / 0.40)',
