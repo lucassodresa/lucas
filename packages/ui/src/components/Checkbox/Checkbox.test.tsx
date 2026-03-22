@@ -37,6 +37,11 @@ describe('rendering', () => {
 });
 
 describe('controlled behaviour', () => {
+  it('reflects checked={true} in the DOM', () => {
+    render(<Checkbox aria-label="Accept terms" checked onChange={() => {}} />);
+    expect(screen.getByRole('checkbox')).toBeChecked();
+  });
+
   it('calls onChange when clicked', async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
