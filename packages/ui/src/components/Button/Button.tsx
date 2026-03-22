@@ -18,6 +18,10 @@ interface ButtonBaseProps {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+  onMouseLeave?: React.MouseEventHandler<HTMLElement>;
+  onFocus?: React.FocusEventHandler<HTMLElement>;
+  onBlur?: React.FocusEventHandler<HTMLElement>;
   className?: string;
 }
 
@@ -54,7 +58,7 @@ function useSubmitCooldown(duration = 1000) {
   return { cooling, trigger } as const;
 }
 
-export function Button({
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button({
   children,
   variant = 'primary',
   size = 'md',
@@ -66,9 +70,13 @@ export function Button({
   type = 'button',
   disabled = false,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur,
   'aria-label': ariaLabel,
   className,
-}: ButtonProps) {
+}: ButtonProps, ref) {
   const { cooling, trigger } = useSubmitCooldown();
 
   const childrenLabel = typeof children === 'string' ? children : undefined;
@@ -137,6 +145,10 @@ export function Button({
         className={classNames}
         onClick={handleClick as React.MouseEventHandler<HTMLAnchorElement>}
         onKeyDown={handleKeyDown}
+        onMouseEnter={onMouseEnter as React.MouseEventHandler<HTMLAnchorElement>}
+        onMouseLeave={onMouseLeave as React.MouseEventHandler<HTMLAnchorElement>}
+        onFocus={onFocus as React.FocusEventHandler<HTMLAnchorElement>}
+        onBlur={onBlur as React.FocusEventHandler<HTMLAnchorElement>}
       >
         {content}
       </a>
@@ -145,6 +157,7 @@ export function Button({
 
   return (
     <button
+      ref={ref}
       type={type}
       disabled={isEffectivelyDisabled}
       aria-disabled={ariaDisabled}
@@ -152,8 +165,12 @@ export function Button({
       aria-label={effectiveAriaLabel}
       className={classNames}
       onClick={handleClick as React.MouseEventHandler<HTMLButtonElement>}
+      onMouseEnter={onMouseEnter as React.MouseEventHandler<HTMLButtonElement>}
+      onMouseLeave={onMouseLeave as React.MouseEventHandler<HTMLButtonElement>}
+      onFocus={onFocus as React.FocusEventHandler<HTMLButtonElement>}
+      onBlur={onBlur as React.FocusEventHandler<HTMLButtonElement>}
     >
       {content}
     </button>
   );
-}
+});

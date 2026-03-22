@@ -1,0 +1,22 @@
+.tooltip {
+  background-color: var(--color-neutral-800);
+  color: var(--color-neutral-0);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  max-width: 16rem;
+  z-index: var(--z-tooltip);
+  pointer-events: none;
+}
+
+.arrow {
+  fill: var(--color-neutral-800);
+}
+
+.disabledWrapper {
+  display: inline-block;
+  cursor: not-allowed;
+}

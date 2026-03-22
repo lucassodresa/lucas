@@ -33,6 +33,17 @@ describe('controlled behaviour', () => {
     await user.type(screen.getByRole('textbox'), 'hello');
     expect(onChange).toHaveBeenCalled();
   });
+
+  it('forwards name and onBlur from RHF register spread', async () => {
+    const user = userEvent.setup();
+    const onBlur = vi.fn();
+    render(<Input name="email" onBlur={onBlur} />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveAttribute('name', 'email');
+    await user.click(input);
+    await user.tab();
+    expect(onBlur).toHaveBeenCalled();
+  });
 });
 
 describe('error state', () => {

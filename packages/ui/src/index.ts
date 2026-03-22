@@ -50,3 +50,12 @@ export type { FormProps } from './components/Form';
 
 export { Field } from './components/Field';
 export type { FieldProps } from './components/Field';
+
+export { Modal } from './components/Modal';
+export type { ModalProps } from './components/Modal';
+
+export { Drawer } from './components/Drawer';
+export type { DrawerProps, DrawerSide } from './components/Drawer';
+
+export { Tooltip } from './components/Tooltip';
+export type { TooltipProps } from './components/Tooltip';

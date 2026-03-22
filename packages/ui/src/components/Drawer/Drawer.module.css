@@ -1,0 +1,48 @@
+.drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20rem;
+  max-width: calc(100vw - var(--spacing-8));
+  background-color: var(--color-bg-base);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-6);
+  overflow-y: auto;
+  outline: none;
+}
+
+.drawer--left {
+  left: 0;
+  animation: drawer-in-left var(--duration-slow) var(--ease-out);
+}
+
+.drawer--right {
+  right: 0;
+  animation: drawer-in-right var(--duration-slow) var(--ease-out);
+}
+
+.title {
+  margin: 0 0 var(--spacing-4);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+@keyframes drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
