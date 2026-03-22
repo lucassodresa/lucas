@@ -5,11 +5,12 @@ import { withThemeByDataAttribute } from '@storybook/addon-themes';
 // See TECH_DEBTS.md → "Storybook token dependency"
 import '../dist/tokens/tokens.css';
 import '../dist/tokens/tokens-dark.css';
+import './preview.css';
 
 const preview: Preview = {
   decorators: [
     withThemeByDataAttribute({
-      themes: { light: '', dark: 'dark' },
+      themes: { light: 'light', dark: 'dark' },
       defaultTheme: 'light',
       attributeName: 'data-theme',
     }),

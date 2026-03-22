@@ -26,7 +26,7 @@ async function generateTokenFiles(): Promise<void> {
 
   writeFileSync(
     resolve(tokensOutDir, 'tokens.css'),
-    `@import '@fontsource-variable/inter';\n\n:root {\n${renderVars(lightTokens)}\n}\n`,
+    `@import '@fontsource-variable/inter';\n\n:root {\n${renderVars(lightTokens)}\n}\n\n[data-theme="light"] {\n${renderVars(lightTokens)}\n}\n`,
     'utf-8',
   );
 
