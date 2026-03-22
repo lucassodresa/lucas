@@ -248,7 +248,7 @@ export const lightTokens: Record<string, string> = {
 
   // ── Border ────────────────────────────────────────────────
   'color-border-default': ref('color-neutral-300'),
-  'color-border-strong': ref('color-neutral-400'),
+  'color-border-strong': ref('color-neutral-500'),
   'color-border-focus': ref('color-blue-500'),
 
   // ── Text ──────────────────────────────────────────────────
@@ -394,7 +394,7 @@ export const lightTokens: Record<string, string> = {
   // ── Focus ring ────────────────────────────────────────────
   'focus-ring-width': '3px',
   'focus-ring-offset': '2px',
-  'focus-ring-color': ref('color-blue-400'),
+  'focus-ring-color': ref('color-blue-600'),
 };
 
 /** Semantic token overrides for dark mode. Primitives stay unchanged. */
@@ -407,7 +407,7 @@ export const darkTokens: Record<string, string> = {
 
   // ── Borders ───────────────────────────────────────────────
   'color-border-default': ref('color-neutral-700'),
-  'color-border-strong': ref('color-neutral-600'),
+  'color-border-strong': ref('color-neutral-500'),
   'color-border-focus': ref('color-blue-400'),
 
   // ── Text ──────────────────────────────────────────────────

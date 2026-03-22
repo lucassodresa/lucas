@@ -1,0 +1,63 @@
+.root {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.root--disabled {
+  cursor: not-allowed;
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.input:focus-visible + .track {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.track {
+  position: relative;
+  display: block;
+  width: var(--spacing-10);
+  height: var(--spacing-6);
+  background-color: var(--color-border-strong);
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-fast) var(--ease-default);
+}
+
+.input:checked + .track {
+  background-color: var(--color-primary);
+}
+
+.input:disabled + .track {
+  opacity: 0.45;
+}
+
+.root--error .track {
+  outline: 1px solid var(--color-danger);
+  outline-offset: 1px;
+}
+
+.thumb {
+  position: absolute;
+  top: var(--spacing-1);
+  left: var(--spacing-1);
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+  background-color: var(--color-neutral-0);
+  border-radius: var(--radius-full);
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+
+.input:checked + .track .thumb {
+  transform: translateX(var(--spacing-4));
+}

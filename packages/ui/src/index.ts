@@ -29,3 +29,18 @@ export type { SeparatorProps, SeparatorOrientation } from './components/Separato
 
 export { Heading } from './components/Heading';
 export type { HeadingProps, HeadingElement, HeadingSize } from './components/Heading';
+
+export { Input } from './components/Input';
+export type { InputProps } from './components/Input';
+
+export { Select } from './components/Select';
+export type { SelectProps } from './components/Select';
+
+export { Checkbox } from './components/Checkbox';
+export type { CheckboxProps } from './components/Checkbox';
+
+export { Switch } from './components/Switch';
+export type { SwitchProps } from './components/Switch';
+
+export { Password } from './components/Password';
+export type { PasswordProps } from './components/Password';
